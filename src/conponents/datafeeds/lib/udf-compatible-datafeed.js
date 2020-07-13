@@ -1,0 +1,18 @@
+import * as tslib_1 from "tslib";
+import { UDFCompatibleDatafeedBase } from './udf-compatible-datafeed-base';
+import { QuotesProvider } from './quotes-provider';
+import { Requester } from './requester';
+var UDFCompatibleDatafeed = /** @class */ (function (_super) {
+    tslib_1.__extends(UDFCompatibleDatafeed, _super);
+    function UDFCompatibleDatafeed(glbServ, socket, datafeedURL, updateFrequency) {
+        if (updateFrequency === void 0) { updateFrequency = 1.5 * 1000; }
+        var _this = this;
+        // console.log(glbServ, socket)
+        var requester = new Requester(glbServ, socket);
+        var quotesProvider = new QuotesProvider(datafeedURL, requester);
+        _this = _super.call(this, glbServ, socket, datafeedURL, quotesProvider, requester, updateFrequency) || this;
+        return _this;
+    }
+    return UDFCompatibleDatafeed;
+}(UDFCompatibleDatafeedBase));
+export { UDFCompatibleDatafeed };
